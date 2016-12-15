@@ -8,7 +8,7 @@ Collection of shell aliases and functions.
 
 ``` bash
 cd $HOME/
-git clone ...
+git clone https://github.com/keuv-grvl/.shellutils.d.git
 ```
 
 ## Usage
