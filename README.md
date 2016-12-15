@@ -16,14 +16,14 @@ git clone https://github.com/keuv-grvl/.shellutils.d.git
 Add to you `.bashrc` or `.zshrc`:
 
 ``` bash
-for F in $(ls $HOME/.shellutil.d/*.sh); do
-  source $HOME/.shell_aliases.sh
+for F in $(ls $HOME/.shellutils.d/*.sh); do
+  source $F
 done;
 ```
 
 ## Update
 
 ``` bash
-cd $HOME/.shellutil.d/
+cd $HOME/.shellutils.d/
 git pull
 ```
