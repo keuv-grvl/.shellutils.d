@@ -13,7 +13,7 @@ alias alert='notify-send -i "$([ $? = 0 ] && echo terminal || echo error)" "$([ 
 
 # copy output to clipboard
 # usage: pwd | clip
-which xsel > /dev/null && alias clip='xsel --clipboard'
+command -v xsel > /dev/null && alias clip='xsel --clipboard'
 
 # delete gedit temp files
 alias cleantilde='find . -name "*~" -delete'
@@ -36,5 +36,5 @@ alias gbn="git branch"
 alias gbr="git branch -D"
 alias gbrr="git push origin --delete "
 
-which thefuck > /dev/null && eval "$(thefuck --alias)"
-which thefuck > /dev/null && eval "$(thefuck --alias merde)"
+command -v thefuck > /dev/null && eval "$(thefuck --alias)"
+command -v thefuck > /dev/null && eval "$(thefuck --alias merde)"
