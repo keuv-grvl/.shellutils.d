@@ -26,4 +26,5 @@ done;
 ``` bash
 cd $HOME/.shellutils.d/
 git pull
+source ~/.$( basename $(echo $0))rc
 ```
