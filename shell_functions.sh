@@ -16,9 +16,11 @@ function memu {
   free | awk 'NR==2{print}' | sed -r 's/\s{2,}/\t/g' | awk -F "\t" '{print $0; printf "%.2f%% (%.2f/%.2fGB)\n", ($3 / $2), $3/1024/1024, $2/1024/1024}'
 }
 
-# disk usage
+# disk usage (of $HOME by default)
 function disku {
-  df $HOME | awk 'NR==2{printf("%.2f%% (%.2f/%dGB)\n", $3/$2*100, $3/1024/1024 , ($2)/1024/1024)}'
+  DIR=$HOME
+  [ ! -z $1 ] && DIR=$1
+  df $DIR | awk 'NR==2{printf("%.2f%% (%.2f/%.2fGB)\n", $3/$2*100, $3/1024/1024 , ($2)/1024/1024)}'
 }
 
 # download using curl
