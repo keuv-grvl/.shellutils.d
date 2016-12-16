@@ -1,4 +1,4 @@
-# .shellutil.d/
+# ~/.shellutils.d/
 
 Collection of shell aliases and functions.
 
