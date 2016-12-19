@@ -17,7 +17,7 @@ function memu {
   free \
   | awk 'NR==2{print}' \
   | sed -r 's/\s{2,}/\t/g' \
-  | awk -F "\t" '{print $0; printf "%.2f%% (%.2f/%.2fGB)\n", (($3 + $5) / $2), ($3 + $5)/1024/1024, $2/1024/1024}'
+  | awk -F "\t" '{printf "%.2f%% (%.2f/%.2fGB)\n", (($3 + $5) / $2), ($3 + $5)/1024/1024, $2/1024/1024}'
 }
 
 # disk usage (of $HOME by default)
