@@ -2,8 +2,13 @@
 ### FUNCTIONS ###
 
 # make and go to dir
-function mkcd { 
-  mkdir -p $1 && cd $1 
+function mkcd {
+  mkdir -p $1 && cd $1
+}
+
+# print status code of the last command
+function ret {
+  echo $?
 }
 
 # load = (loadavg / nproc * 100)
