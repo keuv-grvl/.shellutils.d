@@ -11,9 +11,7 @@ cd $HOME/
 git clone https://github.com/keuv-grvl/.shellutils.d.git
 ```
 
-## Usage
-
-Add to you `.bashrc` or `.zshrc`:
+Then add the following to you `.bashrc`, `.zshrc` or `.your_shellrc`:
 
 ``` bash
 for F in $(ls $HOME/.shellutils.d/*.sh); do
@@ -26,5 +24,5 @@ done;
 ``` bash
 cd $HOME/.shellutils.d/
 git pull
-source ~/.$( basename $(echo $0))rc
+source ~/.$(basename $SHELL)rc
 ```
