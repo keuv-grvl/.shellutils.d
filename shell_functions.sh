@@ -6,6 +6,11 @@ function mkcd {
   mkdir -p $1 && cd $1
 }
 
+# make dir into RAM (avoiding conflict with other users)
+function cdmem {
+  mkdir -p /dev/shm/$USER && cd /dev/shm/$USER
+}
+
 # print status code of the last command
 function ret {
   echo $?
