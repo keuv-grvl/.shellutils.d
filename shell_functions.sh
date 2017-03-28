@@ -103,3 +103,11 @@ function md2pdf {
   OUT="${filename%.*}"
   pandoc -s -V geometry:margin=1in -V documentclass:article -V fontsize=12pt "$fullfile" -o "$OUT.pdf"
 }
+
+# print GPU usage (if 'nvidia-smi' is installed)
+function gpuload {
+  which nvidia-smi >/dev/null 2>&1  \
+  && ( nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv,noheader,nounits  \
+       | awk -F", " '{print "GPU load: "$1"%\nGPU mem. usage: "$2"%"}' )  \
+  || echo "No gpu found"
+}
