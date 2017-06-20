@@ -111,3 +111,18 @@ function gpuload {
        | awk -F", " '{print "GPU load: "$1"%\nGPU mem. usage: "$2"%"}' )  \
   || echo "No gpu found"
 }
+
+
+# deeply inspired from R package beepR
+# usage: beep list ; beep coin ; beep treasure
+function beep {
+  SOUNDS_DIR="$HOME/.shellutils.d/sounds"
+  DEFAULT_SOUND="ping.wav"
+
+  [ "$1" = "list" ] && echo $(ls -1 $SOUNDS_DIR | sed 's/\.wav//') \
+  || (
+      [ -f "$SOUNDS_DIR/$1.wav" ] \
+        && paplay "$SOUNDS_DIR/$1.wav" \
+        || paplay "$SOUNDS_DIR/$DEFAULT_SOUND"
+      )
+}
