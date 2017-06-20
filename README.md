@@ -24,5 +24,25 @@ done;
 ``` bash
 cd $HOME/.shellutils.d/
 git pull
-source ~/.$(basename $SHELL)rc
+source ~/.$(basename $0)rc
 ```
+
+# Functions
+
+| Command | Description |
+|---|---|
+| `ret`               | Get return code of last command |
+| `load`              | Print load |
+| `memu`              | Print memory usage |
+| `disku`             | Print disk usage (default: `$HOME`)|
+| `maxproc`           | Print max number of "free" CPU |
+| `mkcd <DIR>`        | Make a directory a move into it |
+| `cdmem`             | Move to `/dev/shm/$USER/` |
+| `dl <URL>`          | Download a file from its URL |
+| `extract <ARCHIVE>` | Extract any archive |
+| `hashall <FILES>`   | Compute and store MD5 hash for a list of file |
+| `checkall <*.md5>`  | Check multiple MD5 hash |
+| `pingssh`           | Ping SSH servers from you `$HOME/.ssh/config` file |
+| `md2pdf <FILE.md`   | Convert Markdown to PDF using pandoc |
+| `gpuload`           | Print GPU usage for NVidia graphic cards |
+| `beep`              | Play a sound (see `beep list`) |
