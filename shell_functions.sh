@@ -116,13 +116,15 @@ function gpuload {
 # deeply inspired from R package beepR
 # usage: beep list ; beep coin ; beep treasure
 function beep {
+  PLAYER="paplay"
+  [ $(uname) = "Darwin" ] && PLAYER="afplay"
   SOUNDS_DIR="$HOME/.shellutils.d/sounds"
   DEFAULT_SOUND="ping.wav"
 
   [ "$1" = "list" ] && echo $(ls -1 $SOUNDS_DIR | sed 's/\.wav//') \
   || (
       [ -f "$SOUNDS_DIR/$1.wav" ] \
-        && paplay "$SOUNDS_DIR/$1.wav" \
-        || paplay "$SOUNDS_DIR/$DEFAULT_SOUND"
+        && $PLAYER "$SOUNDS_DIR/$1.wav" \
+        || $PLAYER "$SOUNDS_DIR/$DEFAULT_SOUND"
       )
 }
