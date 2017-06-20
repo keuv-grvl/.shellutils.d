@@ -34,9 +34,9 @@ source ~/.$(basename $0)rc
 | `ret`               | Get return code of last command |
 | `load`              | Print load |
 | `memu`              | Print memory usage |
-| `disku`             | Print disk usage (default: `$HOME`)|
+| `disku (<FOLDER>)`  | Print disk usage (default: `$HOME`)|
 | `maxproc`           | Print max number of "free" CPU |
-| `mkcd <DIR>`        | Make a directory a move into it |
+| `mkcd <FOLDER>`     | Make a directory a move into it |
 | `cdmem`             | Move to `/dev/shm/$USER/` |
 | `dl <URL>`          | Download a file from its URL |
 | `extract <ARCHIVE>` | Extract any archive |
