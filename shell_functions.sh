@@ -30,7 +30,7 @@ function memu {
 function disku {
   DIR=$HOME
   [ ! -z $1 ] && DIR=$1
-  df $DIR | awk 'NR==2{printf("%.2f%% (%.2f/%.2fGB)\n", $3/$2*100, $3/1024/1024 , ($2)/1024/1024)}'
+  df -P $DIR | awk 'NR==2{printf("%.2f%% (%.2f/%.2fGB)\n", $3/$2*100, $3/1024/1024 , ($2)/1024/1024)}'
 }
 
 # download using curl
