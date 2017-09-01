@@ -24,7 +24,7 @@ done;
 ``` bash
 cd $HOME/.shellutils.d/
 git pull
-source ~/.$(basename $( command -v -- "$0" >/dev/null && echo $(command -v -- "$0") || echo "$SHELL") )rc
+source ~/.$(cat /proc/$$/comm)rc
 ```
 
 # Functions
