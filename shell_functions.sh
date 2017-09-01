@@ -34,7 +34,7 @@ function memu {
 function disku {
   DIR=$HOME
   [ ! -z $1 ] && DIR=$1
-  df $DIR | awk 'NR==2{printf("%.2f%% (%.2f/%.2fGB)\n", $3/$2*100, $3/1024/1024 , ($2)/1024/1024)}'
+  df -P $DIR | awk 'NR==2{printf("%.2f%% (%.2f/%.2fGB)\n", $3/$2*100, $3/1024/1024 , ($2)/1024/1024)}'
 }
 
 # download using curl
@@ -106,4 +106,29 @@ function md2pdf {
   filename=$(basename "$fullfile")
   OUT="${filename%.*}"
   pandoc -s -V geometry:margin=1in -V documentclass:article -V fontsize=12pt "$fullfile" -o "$OUT.pdf"
+}
+
+# print GPU usage (if 'nvidia-smi' is installed)
+function gpuload {
+  which nvidia-smi >/dev/null 2>&1  \
+  && ( nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv,noheader,nounits  \
+       | awk -F", " '{print "GPU load: "$1"%\nGPU mem. usage: "$2"%"}' )  \
+  || echo "No gpu found"
+}
+
+
+# deeply inspired from R package beepR
+# usage: beep list ; beep coin ; beep treasure
+function beep {
+  PLAYER="paplay"
+  [ $(uname) = "Darwin" ] && PLAYER="afplay"
+  SOUNDS_DIR="$HOME/.shellutils.d/sounds"
+  DEFAULT_SOUND="ping.wav"
+
+  [ "$1" = "list" ] && echo $(ls -1 $SOUNDS_DIR | sed 's/\.wav//') \
+  || (
+      [ -f "$SOUNDS_DIR/$1.wav" ] \
+        && $PLAYER "$SOUNDS_DIR/$1.wav" \
+        || $PLAYER "$SOUNDS_DIR/$DEFAULT_SOUND"
+      )
 }
