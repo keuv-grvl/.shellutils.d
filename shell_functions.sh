@@ -136,3 +136,8 @@ function beep {
     fi
   fi
 }
+
+function tmpcd {
+  cd "$(mktemp -d)"
+  pwd
+}
