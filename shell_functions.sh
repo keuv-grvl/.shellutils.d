@@ -13,7 +13,9 @@ function cdmem {
 
 # print status code of the last command
 function ret {
-  echo $?
+  r=$?
+  echo $r
+  (exit $r)
 }
 
 # load = (loadavg / nproc * 100)
