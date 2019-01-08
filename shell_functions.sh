@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 ### FUNCTIONS ###
 
@@ -47,10 +48,8 @@ function dl {
 
 # max number of "free" CPU = max(1, (number of processor - current load))
 function maxproc {
-  nproc=$(grep -c "processor" /proc/cpuinfo)
-  load=$(awk '{printf "%.0f\n", ($1 + 0.5)}' /proc/loadavg)
-  maxproc=$(( nproc - load ))
-  [ $maxproc -lt 1 ] && echo 1 || echo $maxproc
+  LOAD=$(awk '{printf "%.0f\n", ($1 + 0.5)}' /proc/loadavg)
+  echo $(nproc --ignore=$LOAD)
 }
 
 # compute and store MD5hash of a list of file
