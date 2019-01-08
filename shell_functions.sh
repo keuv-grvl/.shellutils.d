@@ -22,7 +22,7 @@ function ret {
 # load = (loadavg / nproc * 100)
 function load {
    echo "$(awk '{print $1}' /proc/loadavg )" "$(nproc)"  \
-  | awk '{ printf("%.2f%% (%.2f/%i)", $1/$2*100, $1, $2) }'
+  | awk '{ printf("%.2f%% (%.2f/%i)\n", $1/$2*100, $1, $2) }'
 }
 
 # memory usage (as in gnome-system-monitor, cached memory is not considered)
