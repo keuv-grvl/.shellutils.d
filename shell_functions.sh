@@ -7,8 +7,14 @@ function mkcd {
   mkdir -p "$1" && cd "$1"
 }
 
+# move to temp dir
+function tmpcd {
+  cd "$(mktemp -d)"
+  pwd
+}
+
 # make dir into RAM (avoiding conflict with other users)
-function cdmem {
+function memcd {
   mkdir -p "/dev/shm/$USER" && cd "/dev/shm/$USER"
 }
 
@@ -17,6 +23,24 @@ function ret {
   r=$?
   echo $r
   (exit $r)
+}
+
+# download using curl
+function dwld {
+  curl -OL "$@"
+}
+
+# upload file to https://transfer.sh/
+function upld {
+  if [ $# -eq 0 ]; then
+    echo -e "usage: $0 <FILE>";
+    return 1;
+  fi
+  tmpfile=$(mktemp -t $0XXX);
+  basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
+  curl --upload-file "$1" "https://transfer.sh/$basefile" -o $tmpfile;
+  echo $(cat $tmpfile);
+  rm -f $tmpfile;
 }
 
 # load = (loadavg / nproc * 100)
@@ -41,15 +65,9 @@ function disku {
   | awk 'NR==2{printf("%.2f%% (%.2f/%.2fGB)\n", $3/$2*100, $3/1024/1024 , ($2)/1024/1024)}'
 }
 
-# download using curl
-function dl {
-  curl -OL "$@"
-}
-
-# max number of "free" CPU = max(1, (number of processor - current load))
+# max number of "free" CPU = max(1, (number of CPU - current load))
 function maxproc {
-  LOAD=$(awk '{printf "%.0f\n", ($1 + 0.5)}' /proc/loadavg)
-  echo $(nproc --ignore=$LOAD)
+  echo $(nproc --ignore=$(awk '{printf "%.0f\n", ($1 + 0.5)}' /proc/loadavg))
 }
 
 # compute and store MD5hash of a list of file
@@ -69,13 +87,15 @@ function checkall {
     bash -c "md5sum -c F"
 }
 
-# list hostnames in you ~/.ssh/config and ping them
-# - Some servers has been configured to not respond to ping
+# list hostnames in you $HOME/.ssh/config and ping them
+# /!\ Some servers may be configured to not respond to ping
 function pingssh {
-  grep -i "hostname" "$HOME/.ssh/config"  \
-  | awk '{print $NF}'  \
-  | xargs -I IP -n1 -P30  \
-    bash -c "ping -c1 IP 2>&1 >/dev/null && echo -e '\e[32m⚫\e[0m IP' || echo -e '\e[31m❌\e[0m IP'"
+  [ -f "$HOME/.ssh/config" ]  \
+  && ( grep -i "hostname" "$HOME/.ssh/config"  \
+    | awk '{print $NF}'  \
+    | xargs -I IP -n1 -P30  \
+      bash -c "ping -w1 -c1 IP 2>&1 >/dev/null && echo -e '\e[32m⚫\e[0m IP' || echo -e '\e[31m❌\e[0m IP'" )  \
+  || echo "No SSH config found."
 }
 
 # extract any archive
@@ -113,7 +133,7 @@ function md2pdf {
 
 # print GPU usage (if 'nvidia-smi' is installed)
 function gpuload {
-  which nvidia-smi >/dev/null 2>&1  \
+  command -v nvidia-smi >/dev/null 2>&1  \
   && ( nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv,noheader,nounits  \
        | awk -F", " '{print "GPU load: ""$1""%\nGPU mem. usage: "$2"%"}' )  \
   || echo "No GPU found"
@@ -136,9 +156,4 @@ function beep {
       $PLAYER "$SOUNDS_DIR/$DEFAULT_SOUND"
     fi
   fi
-}
-
-function tmpcd {
-  cd "$(mktemp -d)"
-  pwd
 }
