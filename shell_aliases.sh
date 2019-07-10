@@ -18,5 +18,4 @@ command -v xsel > /dev/null && alias clip='xsel --clipboard'
 # delete gedit temp files
 alias cleantilde='find . -name "*~" -delete'
 
-command -v thefuck > /dev/null && eval "$(thefuck --alias)"
-command -v thefuck > /dev/null && eval "$(thefuck --alias merde)"
+alias dl='dwld'
