@@ -135,7 +135,7 @@ function md2pdf {
 function gpuload {
   command -v nvidia-smi >/dev/null 2>&1  \
   && ( nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv,noheader,nounits  \
-       | awk -F", " '{print "GPU load: ""$1""%\nGPU mem. usage: "$2"%"}' )  \
+       | awk -F", " '{print "GPU load: "$1"%\nGPU mem. usage: "$2"%"}' )  \
   || echo "No GPU found"
 }
 
