@@ -9,7 +9,7 @@ function mkcd {
 
 # move to temp dir
 function tmpcd {
-  cd "$(mktemp -d "tmp.$(date +%s).XXX")"
+  cd "$(mktemp -d "/tmp/tmp.$(date +%s).XXX")"
   pwd
 }
 
