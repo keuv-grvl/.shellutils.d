@@ -157,3 +157,12 @@ function beep {
     fi
   fi
 }
+
+# run the given command in the queue
+function queue {
+  (screen -ls | grep __QUEUE__  > /dev/null) || screen -dmS __QUEUE__
+  screen -S __QUEUE__ -X stuff "cd ${PWD} > /dev/null ^M"
+  echo "$*"
+  screen -S __QUEUE__ -X stuff "$*"
+  screen -S __QUEUE__ -X stuff "^M"
+}
