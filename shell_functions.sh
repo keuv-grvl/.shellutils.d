@@ -162,6 +162,7 @@ function beep {
 function queue {
   (screen -ls | grep __QUEUE__  > /dev/null) || screen -dmS __QUEUE__
   screen -S __QUEUE__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUEx__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
   echo "$*"
   screen -S __QUEUE__ -X stuff "$*"
   screen -S __QUEUE__ -X stuff "^M"
@@ -170,6 +171,7 @@ function queue {
 function queue1 {
   (screen -ls | grep __QUEUE1__  > /dev/null) || screen -dmS __QUEUE1__
   screen -S __QUEUE1__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE1__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
   echo "$*"
   screen -S __QUEUE1__ -X stuff "$*"
   screen -S __QUEUE1__ -X stuff "^M"
@@ -178,6 +180,7 @@ function queue1 {
 function queue2 {
   (screen -ls | grep __QUEUE2__  > /dev/null) || screen -dmS __QUEUE2__
   screen -S __QUEUE2__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE2__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
   echo "$*"
   screen -S __QUEUE2__ -X stuff "$*"
   screen -S __QUEUE2__ -X stuff "^M"
@@ -186,7 +189,12 @@ function queue2 {
 function queue3 {
   (screen -ls | grep __QUEUE3__  > /dev/null) || screen -dmS __QUEUE3__
   screen -S __QUEUE3__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE3__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
   echo "$*"
   screen -S __QUEUE3__ -X stuff "$*"
   screen -S __QUEUE3__ -X stuff "^M"
+}
+
+function killscreens {
+    screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill
 }
