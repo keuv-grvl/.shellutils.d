@@ -166,3 +166,27 @@ function queue {
   screen -S __QUEUE__ -X stuff "$*"
   screen -S __QUEUE__ -X stuff "^M"
 }
+
+function queue1 {
+  (screen -ls | grep __QUEUE1__  > /dev/null) || screen -dmS __QUEUE1__
+  screen -S __QUEUE1__ -X stuff "cd ${PWD} > /dev/null ^M"
+  echo "$*"
+  screen -S __QUEUE1__ -X stuff "$*"
+  screen -S __QUEUE1__ -X stuff "^M"
+}
+
+function queue2 {
+  (screen -ls | grep __QUEUE2__  > /dev/null) || screen -dmS __QUEUE2__
+  screen -S __QUEUE2__ -X stuff "cd ${PWD} > /dev/null ^M"
+  echo "$*"
+  screen -S __QUEUE2__ -X stuff "$*"
+  screen -S __QUEUE2__ -X stuff "^M"
+}
+
+function queue3 {
+  (screen -ls | grep __QUEUE3__  > /dev/null) || screen -dmS __QUEUE3__
+  screen -S __QUEUE3__ -X stuff "cd ${PWD} > /dev/null ^M"
+  echo "$*"
+  screen -S __QUEUE3__ -X stuff "$*"
+  screen -S __QUEUE3__ -X stuff "^M"
+}
