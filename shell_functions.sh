@@ -204,6 +204,24 @@ function queue4 {
   screen -S __QUEUE4__ -X stuff "^M"
 }
 
+function queue5 {
+  (screen -ls | grep __QUEUE5__  > /dev/null) || screen -dmS __QUEUE5__
+  screen -S __QUEUE5__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE5__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  echo "$*"
+  screen -S __QUEUE5__ -X stuff "$*"
+  screen -S __QUEUE5__ -X stuff "^M"
+}
+
+function queue6 {
+  (screen -ls | grep __QUEUE6__  > /dev/null) || screen -dmS __QUEUE6__
+  screen -S __QUEUE6__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE6__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  echo "$*"
+  screen -S __QUEUE6__ -X stuff "$*"
+  screen -S __QUEUE6__ -X stuff "^M"
+}
+
 function killscreens {
     screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill
 }
