@@ -18,4 +18,6 @@ command -v xsel > /dev/null && alias clip='xsel --clipboard'
 # delete gedit temp files
 alias cleantilde='find . -name "*~" -delete'
 
+# misc
 alias dl='dwld'
+alias htopu='htop -u $USER'
