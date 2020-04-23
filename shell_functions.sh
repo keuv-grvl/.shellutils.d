@@ -162,7 +162,7 @@ function beep {
 function queue {
   (screen -ls | grep __QUEUE__  > /dev/null) || screen -dmS __QUEUE__
   screen -S __QUEUE__ -X stuff "cd ${PWD} > /dev/null ^M"
-  screen -S __QUEUEx__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  screen -S __QUEUE__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
   echo "$*"
   screen -S __QUEUE__ -X stuff "$*"
   screen -S __QUEUE__ -X stuff "^M"
@@ -220,6 +220,60 @@ function queue6 {
   echo "$*"
   screen -S __QUEUE6__ -X stuff "$*"
   screen -S __QUEUE6__ -X stuff "^M"
+}
+
+function queue7 {
+  (screen -ls | grep __QUEUE7__  > /dev/null) || screen -dmS __QUEUE7__
+  screen -S __QUEUE7__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE7__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  echo "$*"
+  screen -S __QUEUE7__ -X stuff "$*"
+  screen -S __QUEUE7__ -X stuff "^M"
+}
+
+function queue8 {
+  (screen -ls | grep __QUEUE8__  > /dev/null) || screen -dmS __QUEUE8__
+  screen -S __QUEUE8__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE8__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  echo "$*"
+  screen -S __QUEUE8__ -X stuff "$*"
+  screen -S __QUEUE8__ -X stuff "^M"
+}
+
+function queue9 {
+  (screen -ls | grep __QUEUE9__  > /dev/null) || screen -dmS __QUEUE9__
+  screen -S __QUEUE9__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE9__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  echo "$*"
+  screen -S __QUEUE9__ -X stuff "$*"
+  screen -S __QUEUE9__ -X stuff "^M"
+}
+
+function queue10 {
+  (screen -ls | grep __QUEUE10__  > /dev/null) || screen -dmS __QUEUE10__
+  screen -S __QUEUE10__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE10__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  echo "$*"
+  screen -S __QUEUE10__ -X stuff "$*"
+  screen -S __QUEUE10__ -X stuff "^M"
+}
+
+function queue11 {
+  (screen -ls | grep __QUEUE11__  > /dev/null) || screen -dmS __QUEUE11__
+  screen -S __QUEUE11__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE11__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  echo "$*"
+  screen -S __QUEUE11__ -X stuff "$*"
+  screen -S __QUEUE11__ -X stuff "^M"
+}
+
+function queue12 {
+  (screen -ls | grep __QUEUE12__  > /dev/null) || screen -dmS __QUEUE12__
+  screen -S __QUEUE12__ -X stuff "cd ${PWD} > /dev/null ^M"
+  screen -S __QUEUE12__ -X stuff "conda activate $CONDA_DEFAULT_ENV ^M"
+  echo "$*"
+  screen -S __QUEUE12__ -X stuff "$*"
+  screen -S __QUEUE12__ -X stuff "^M"
 }
 
 function killscreens {
