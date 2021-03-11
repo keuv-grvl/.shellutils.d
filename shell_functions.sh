@@ -279,3 +279,15 @@ function queue12 {
 function killscreens {
     screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill
 }
+
+function valheim-pull {
+  git -C $HOME/.valheim/worlds pull
+  git -C $HOME/.valheim/characters pull
+}
+
+function valheim-push {
+  git -C $HOME/.valheim/worlds commit -m "$(date)" Delfworld.db Delfworld.db.old
+  git -C $HOME/.valheim/worlds push
+  git -C $HOME/.valheim/characters commit -m "$(date)" keuv.fch
+  git -C $HOME/.valheim/characters push
+}
