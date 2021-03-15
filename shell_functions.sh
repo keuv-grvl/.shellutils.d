@@ -286,7 +286,7 @@ function valheim-pull {
 }
 
 function valheim-push {
-  git -C $HOME/.valheim/worlds commit -m "$(date)" Delfworld.db Delfworld.db.old
+  git -C $HOME/.valheim/worlds commit -m "$(date)" Delfworld.db Delfworld.fwl
   git -C $HOME/.valheim/worlds push
   git -C $HOME/.valheim/characters commit -m "$(date)" keuv.fch
   git -C $HOME/.valheim/characters push
