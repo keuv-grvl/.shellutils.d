@@ -1,4 +1,3 @@
-
 ### ALIASES ###
 
 # ls
@@ -13,7 +12,7 @@ alias alert='notify-send -i "$([ $? = 0 ] && echo terminal || echo error)" "$([ 
 
 # copy output to clipboard
 # usage: pwd | clip
-command -v xsel > /dev/null && alias clip='xsel --clipboard'
+command -v xsel >/dev/null && alias clip='xsel --clipboard'
 
 # delete gedit temp files
 alias cleantilde='find . -name "*~" -delete'
@@ -21,3 +20,6 @@ alias cleantilde='find . -name "*~" -delete'
 # misc
 alias dl='dwld'
 alias htopu='htop -u $USER'
+
+alias please="sudo"
+alias plz="sudo"
