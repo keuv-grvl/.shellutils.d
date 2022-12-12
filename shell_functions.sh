@@ -126,9 +126,8 @@ function extract {
 # convert a .md file to PDF using pandoc
 function md2pdf {
   fullfile="$1"
-  filename=$(basename "$fullfile")
-  OUT="${filename%.*}"
-  pandoc -s -V geometry:margin=1in -V documentclass:article -V fontsize=12pt "$fullfile" -o "$OUT.pdf"
+  OUT=$(basename "$fullfile" .md)
+  pandoc -s -V geometry:margin=1in -V documentclass:article -V fontsize=12pt "${fullfile}" -o "${OUT}.pdf"
 }
 
 # print GPU usage (if 'nvidia-smi' is installed)
