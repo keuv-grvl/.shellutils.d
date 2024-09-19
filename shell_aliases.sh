@@ -23,3 +23,5 @@ alias htopu='htop -u $USER'
 
 alias please="sudo"
 alias plz="sudo"
+
+alias dush="du -sh"
