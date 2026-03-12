@@ -30,19 +30,6 @@ function dwld {
   curl -OL "$@"
 }
 
-# upload file to https://transfer.sh/
-function upld {
-  if [ $# -eq 0 ]; then
-    echo -e "usage: $0 <FILE>"
-    return 1
-  fi
-  tmpfile=$(mktemp -t $0XXX)
-  basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g')
-  curl --upload-file "$1" "https://transfer.sh/$basefile" -o $tmpfile
-  echo $(cat $tmpfile)
-  rm -f $tmpfile
-}
-
 # load = (loadavg / nproc * 100)
 function load {
   echo "$(awk '{print $1}' /proc/loadavg)" "$(nproc)" |
@@ -123,13 +110,6 @@ function extract {
   fi
 }
 
-# convert a .md file to PDF using pandoc
-function md2pdf {
-  fullfile="$1"
-  OUT=$(basename "$fullfile" .md)
-  pandoc -s -V geometry:margin=1in -V documentclass:article -V fontsize=12pt "${fullfile}" -o "${OUT}.pdf"
-}
-
 # print GPU usage (if 'nvidia-smi' is installed)
 function gpuload {
   command -v nvidia-smi >/dev/null 2>&1 &&
@@ -157,29 +137,16 @@ function beep {
   fi
 }
 
-# run the given command in the queue
-function queue {
-  echo "See: https://github.com/justanhduc/task-spooler"
-}
-
-
-
 function killscreens {
   screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill
 }
 
-function valheim-pull {
-  git -C $HOME/.valheim/worlds pull
-  git -C $HOME/.valheim/characters pull
-}
-
-function valheim-push {
-  git -C $HOME/.valheim/worlds commit -m "$(date)" Delfworld.db Delfworld.fwl
-  git -C $HOME/.valheim/worlds push
-  git -C $HOME/.valheim/characters commit -m "$(date)" keuv.fch
-  git -C $HOME/.valheim/characters push
-}
-
-function qrclip {
-  xclip -o -s c | qrencode -o - | feh --force-aliasing -ZF -
+function venv_activate {
+    if [ -f .venv/bin/activate ]; then
+        echo "Activating virtual environment from: .venv in `$PWD`"
+        source .venv/bin/activate
+    else
+        echo "Error: No '.venv' directory found." >&2
+        return 1
+    fi
 }
